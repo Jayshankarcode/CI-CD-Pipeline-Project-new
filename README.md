@@ -1,8 +1,7 @@
 CI-CD pipeline project
 
-Are you looking forward to learn Jenkins right from Zero(installation) to Hero(Build end to end pipelines)? then you are at the right place. 
-
 ## Installation on EC2 Instance
+
 
 
 
@@ -13,8 +12,18 @@ Install Jenkins, configure Docker as agent, set up cicd, deploy applications to 
 - Go to AWS Console
 - Instances(running)
 - Launch instances
+We are going to setup Ec2 instance
+<img width="940" height="395" alt="image" src="https://github.com/user-attachments/assets/b824eba3-31ac-4ad2-8fc3-d868949d3978" />
+<img width="940" height="411" alt="image" src="https://github.com/user-attachments/assets/4e7e281b-ac5c-4ebc-b93f-75679fdf9519" />
+I have selected T2large Instance type.
+<img width="940" height="258" alt="image" src="https://github.com/user-attachments/assets/5c78d888-f833-4fcb-8cc6-e55ad23611d7" />
+We have created a Keyvalue pair.
+<img width="903" height="786" alt="image" src="https://github.com/user-attachments/assets/f8cc23e8-fb9f-4448-94d8-ac185b11248b" />
+Finally Ec2 instance is created.
 
-<img width="994" alt="Screenshot 2023-02-01 at 12 37 45 PM" src="https://user-images.githubusercontent.com/43399466/215974891-196abfe9-ace0-407b-abd2-adcffe218e3f.png">
+<img width="940" height="146" alt="image" src="https://github.com/user-attachments/assets/06f4171b-3f3a-4908-a4fc-74b5416351e3" />
+Now ssh into the instance.
+<img width="916" height="794" alt="image" src="https://github.com/user-attachments/assets/8400d700-bcc4-4046-8755-8d4b13737fcb" />
 
 ### Install Jenkins.
 
