@@ -54,15 +54,51 @@ java -version
 Now, you can proceed with installing Jenkins
 
 ```
-curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \
-  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
-echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
-  https://pkg.jenkins.io/debian binary/ | sudo tee \
-  /etc/apt/sources.list.d/jenkins.list > /dev/null
-sudo apt-get update
-sudo apt-get install jenkins
+We have follow below steps to install jenkins.
+As discussed, on Ubuntu 24.04, the correct professional approach is:
+✅ Run Jenkins using Docker
+This avoids:
+GPG key mess
+OS repo issues
+Version conflicts
+And it is 100% acceptable for interviews & real projects.
+🔥 DO THIS NOW — Docker-based Jenkins (Step-by-step)
+1️.Install Docker
+sudo apt update -y
+sudo apt install -y docker.io
+Start & enable Docker:
+sudo systemctl start docker
+sudo systemctl enable docker
+Verify Docker:
+docker --version
+2️.Allow ubuntu user to run Docker
+sudo usermod -aG docker ubuntu
+⚠️ Logout and login again (very important):
+exit
+Then SSH again:
+ssh -i /c/Users/Dell/Downloads/Jay-CICD-Project.pem ubuntu@34.227.65.30
+3️.Run Jenkins container
+docker run -d \
+  --name jenkins \
+  -p 8080:8080 \
+  -p 50000:50000 \
+  -v jenkins_home:/var/jenkins_home \
+  jenkins/jenkins:lts
+Check container:
+docker ps
+You should see jenkins running.
+4.Get Jenkins admin password
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+5️.Open Jenkins in browser
+From your laptop:
+http://34.227.65.30:8080
+🎉 Jenkins UI will load.
 
-```
+<img width="1323" height="641" alt="image" src="https://github.com/user-attachments/assets/baa16951-1352-4bb6-8b8a-b8674d67d138" />
+
+<img width="1305" height="689" alt="image" src="https://github.com/user-attachments/assets/f38f62b3-1f21-47ef-a116-7235981e7ac6" />
+
+
 
 **Note: ** By default, Jenkins will not be accessible to the external world due to the inbound traffic restriction by AWS. Open port 8080 in the inbound traffic rules as show below.
 
@@ -77,17 +113,19 @@ sudo apt-get install jenkins
 
 ### Login to Jenkins using the below URL:
 
-http://<ec2-instance-public-ip-address>:8080    [You can get the ec2-instance-public-ip-address from your AWS EC2 console page]
+http://34.227.65.30:8080   [You can get the ec2-instance-public-ip-address from your AWS EC2 console page]
 
 Note: If you are not interested in allowing `All Traffic` to your EC2 instance
       1. Delete the inbound traffic rule for your instance
       2. Edit the inbound traffic rule to only allow custom TCP port `8080`
   
 After you login to Jenkins, 
-      - Run the command to copy the Jenkins Admin Password - `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
+      - Run the command to copy the Jenkins Admin Password - `docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+`
       - Enter the Administrator password
       
-<img width="1291" alt="Screenshot 2023-02-01 at 10 56 25 AM" src="https://user-images.githubusercontent.com/43399466/215959008-3ebca431-1f14-4d81-9f12-6bb232bfbee3.png">
+<img width="1239" height="684" alt="image" src="https://github.com/user-attachments/assets/9f75d4d5-0497-4ceb-abfe-3e5458bf61fc" />
+
 
 ### Click on Install suggested plugins
 
