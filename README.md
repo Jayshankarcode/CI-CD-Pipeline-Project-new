@@ -65,6 +65,7 @@ OS repo issues
 Version conflicts
 And it is 100% acceptable for interviews & real projects.
 🔥 DO THIS NOW — Docker-based Jenkins (Step-by-step)
+
 1️.Install Docker
 sudo apt update -y
 sudo apt install -y docker.io
@@ -73,12 +74,15 @@ sudo systemctl start docker
 sudo systemctl enable docker
 Verify Docker:
 docker --version
+
 2️.Allow ubuntu user to run Docker
 sudo usermod -aG docker ubuntu
 ⚠️ Logout and login again (very important):
 exit
 Then SSH again:
 ssh -i /c/Users/Dell/Downloads/Jay-CICD-Project.pem ubuntu@34.227.65.30
+
+
 3️.Run Jenkins container
 docker run -d \
   --name jenkins \
@@ -91,6 +95,8 @@ docker ps
 You should see jenkins running.
 4.Get Jenkins admin password
 docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+
+
 5️.Open Jenkins in browser
 From your laptop:
 http://34.227.65.30:8080
@@ -122,7 +128,7 @@ Note: If you are not interested in allowing `All Traffic` to your EC2 instance
       2. Edit the inbound traffic rule to only allow custom TCP port `8080`
   
 After you login to Jenkins, 
-      - Run the command to copy the Jenkins Admin Password - `docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+      - Run the command to copy the Jenkins Admin Password - docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 `
       - Enter the Administrator password
       
@@ -143,7 +149,8 @@ Create First Admin User or Skip the step [If you want to use this Jenkins instan
 
 Jenkins Installation is Successful. You can now starting using the Jenkins 
 
-<img width="990" alt="Screenshot 2023-02-01 at 11 14 13 AM" src="https://user-images.githubusercontent.com/43399466/215961440-3f13f82b-61a2-4117-88bc-0da265a67fa7.png">
+<img width="1035" height="672" alt="image" src="https://github.com/user-attachments/assets/404de1e1-88ca-4d82-a1ec-3ff55fc535ce" />
+
 
 ## Install the Docker Pipeline plugin in Jenkins:
 
