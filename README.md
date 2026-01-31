@@ -47,6 +47,8 @@ Verify Java is Installed
 
 ```
 java -version
+<img width="570" height="64" alt="image" src="https://github.com/user-attachments/assets/5a821f92-8095-4aff-b5c1-75bda9c8c210" />
+
 ```
 
 Now, you can proceed with installing Jenkins
@@ -59,6 +61,7 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
 sudo apt-get update
 sudo apt-get install jenkins
+
 ```
 
 **Note: ** By default, Jenkins will not be accessible to the external world due to the inbound traffic restriction by AWS. Open port 8080 in the inbound traffic rules as show below.
