@@ -221,8 +221,15 @@ If you see it → ✔️ done.
 
 <img width="1226" height="683" alt="image" src="https://github.com/user-attachments/assets/790c09d0-7c0b-4908-a831-e0d3d10301a0" />
 
-
 Wait for the Jenkins to be restarted.
+
+
+Now we will create a pipeline in jenkins.
+
+<img width="1241" height="632" alt="image" src="https://github.com/user-attachments/assets/c8aa154d-98d6-4599-be68-7b925be86185" />
+
+<img width="1275" height="578" alt="image" src="https://github.com/user-attachments/assets/197ed80a-40f8-47b3-bf9a-64fad6acb3d0" />
+
 
 
 ## Docker Slave Configuration
