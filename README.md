@@ -36,7 +36,8 @@ Install Java
 
 ```
 sudo apt update
-<img width="794" height="701" alt="image" src="https://github.com/user-attachments/assets/21f8586f-9570-499f-86d3-3ebc5b3391cd" />
+<img width="940" height="830" alt="image" src="https://github.com/user-attachments/assets/0e77e312-4528-4b5d-942b-bd723476d80b" />
+
 
 sudo apt install openjdk-17-jre
 <img width="1353" height="555" alt="image" src="https://github.com/user-attachments/assets/5d743129-76cc-4cd4-bc7b-43f2247457c5" />
