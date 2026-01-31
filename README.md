@@ -109,7 +109,7 @@ http://34.227.65.30:8080
 
 - <img width="1355" height="519" alt="image" src="https://github.com/user-attachments/assets/087c3343-7ff8-4dfc-b657-a57e7aab49bc" />
 
-<img width="1075" height="194" alt="image" src="https://github.com/user-attachments/assets/620e07db-49e4-4b48-b842-bb74e7d5fc68" />
+- <img width="1075" height="194" alt="image" src="https://github.com/user-attachments/assets/620e07db-49e4-4b48-b842-bb74e7d5fc68" />
 
 ### Login to Jenkins using the below URL:
 
