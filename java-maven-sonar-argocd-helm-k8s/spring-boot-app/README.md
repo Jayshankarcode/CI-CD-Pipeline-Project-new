@@ -67,6 +67,51 @@ cd /opt/sonarqube/bin/linux-x86-64
 ./sonar.sh start
 ```
 
+SonarQube using Docker ✅
+Step 1: Run SonarQube container
+docker run -d \
+  --name sonarqube \
+  -p 9000:9000 \
+  sonarqube:10.4-community
+
+
+Wait ~2 minutes.
+
+Step 2: Open SonarQube UI
+http://34.227.65.30:9000
+
+
+Login:
+
+username: admin
+password: admin
+
+
+It will force password change.
+
+Step 3: Generate Sonar token
+Administration → Security → Users → Tokens
+
+
+Create token → copy it.
+
+Step 4: Add token to Jenkins
+Manage Jenkins → Credentials → Global → Add Credentials
+
+
+Kind: Secret text
+
+Secret: <sonar-token>
+
+ID: sonarqube
+
+Description: Sonar token
+
+✅ This matches your Jenkinsfile:
+
+credentialsId: 'sonarqube'
+
+
 Hurray !! Now you can access the `SonarQube Server` on `http://<ip-address>:9000` 
 
 
