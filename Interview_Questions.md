@@ -137,3 +137,125 @@ Q: What are some of the common plugins that you use in Jenkins ?
 A: Be prepared for answer, you need to have atleast 3-4 on top of your head, so that interview feels you use jenkins on a day-to-day basis.
 
 
+Can you explain your project?
+
+Answer:
+
+I built an end-to-end CI/CD pipeline with GitOps principles for a Spring Boot application. Jenkins handles continuous integration, including build, test, code quality analysis, and Docker image creation. Argo CD handles continuous deployment by monitoring Kubernetes manifests in Git and automatically syncing them to the cluster.
+
+2️⃣ What problem does your project solve?
+
+Answer:
+
+The project eliminates manual deployments, configuration drift, and human error by automating the entire build and deployment process. Git becomes the single source of truth, and deployments are consistent, repeatable, and self-healing.
+
+3️⃣ What tools did you use and why?
+
+Answer:
+
+I used Spring Boot for application development, Maven for build automation, Jenkins for CI, Docker for containerization, SonarQube for code quality, Kubernetes for orchestration, Argo CD for GitOps-based deployment, and GitHub for version control. Each tool was chosen for its reliability and industry adoption.
+
+4️⃣ Explain the CI/CD flow step by step
+
+Answer:
+
+A code change is pushed to GitHub. Jenkins pipeline is triggered automatically. Jenkins builds the application using Maven, performs static code analysis using SonarQube, builds a Docker image, pushes it to Docker Hub, and updates the image tag in Kubernetes deployment manifests in Git. Argo CD detects this Git change and automatically deploys the application to Kubernetes.
+
+5️⃣ What is the role of Jenkins in your project?
+
+Answer:
+
+Jenkins is responsible only for Continuous Integration. It builds the application, runs tests, performs static code analysis, creates Docker images, pushes them to Docker Hub, and updates Kubernetes manifests in Git. It does not deploy directly to Kubernetes.
+
+6️⃣ Why didn’t you deploy directly from Jenkins to Kubernetes?
+
+Answer:
+
+To follow GitOps best practices. Direct deployment from Jenkins couples CI and CD. By separating them, Jenkins handles builds while Argo CD ensures the cluster state always matches what is defined in Git.
+
+7️⃣ What is GitOps and how did you implement it?
+
+Answer:
+
+GitOps is a deployment approach where Git is the single source of truth for infrastructure and applications. I implemented GitOps using Argo CD, which continuously watches Kubernetes manifests stored in Git and reconciles them automatically with the cluster.
+
+8️⃣ How does Argo CD know when to deploy?
+
+Answer:
+
+Argo CD monitors a specific repository, branch, and path. When it detects a change in Kubernetes manifests, it compares the desired state in Git with the actual state in the cluster and automatically syncs them.
+
+9️⃣ What does “Synced” and “Healthy” mean in Argo CD?
+
+Answer:
+
+“Synced” means the Kubernetes cluster matches the manifests in Git. “Healthy” means all Kubernetes resources like pods and services are running successfully.
+
+🔟 How do you prove deployments are automatic?
+
+Answer:
+
+I update only the image tag in the deployment YAML file in Git. Argo CD detects the change, marks the application OutOfSync, automatically syncs it, restarts pods, and deploys the new version without any kubectl commands.
+
+1️⃣1️⃣ What Kubernetes resources did you use?
+
+Answer:
+
+I used Deployments for managing application pods and Services of type NodePort to expose the application externally. Kubernetes handles scaling, rolling updates, and pod health.
+
+1️⃣2️⃣ What happens if someone manually changes Kubernetes resources?
+
+Answer:
+
+Argo CD detects the drift and automatically reverts the changes to match the Git state because self-healing is enabled.
+
+1️⃣3️⃣ What is ImagePullBackOff and did you face it?
+
+Answer:
+
+ImagePullBackOff occurs when Kubernetes cannot pull a container image. I faced this when the image tag was updated in the deployment file without building and pushing the image. The fix was to ensure Jenkins builds and pushes the image before updating manifests.
+
+1️⃣4️⃣ How do you handle rollbacks?
+
+Answer:
+
+Rollbacks are done by reverting the Git commit that changed the deployment manifest. Argo CD detects the revert and automatically deploys the previous version.
+
+1️⃣5️⃣ What challenges did you face?
+
+Answer:
+
+I faced issues like Jenkins executor blocking due to low disk space, workspace permission problems caused by Docker running as root, and ImagePullBackOff errors. I resolved them by cleaning disk space, fixing file ownership, and correcting the CI flow.
+
+1️⃣6️⃣ How is this project production-ready?
+
+Answer:
+
+The pipeline is fully automated, follows GitOps, supports rollback, self-healing, separation of concerns, and eliminates manual deployments, which makes it production-ready.
+
+1️⃣7️⃣ What would you improve if given more time?
+
+Answer:
+
+I would add Ingress with TLS, Helm charts for templating, monitoring using Prometheus and Grafana, alerts via Slack, and use managed Kubernetes like EKS.
+
+1️⃣8️⃣ What did you learn from this project?
+
+Answer:
+
+I learned real-world CI/CD challenges like disk management, permissions, GitOps workflows, Kubernetes troubleshooting, and how to design pipelines that are scalable and maintainable.
+
+1️⃣9️⃣ Why is Argo CD better than kubectl apply?
+
+Answer:
+
+Argo CD provides continuous reconciliation, visibility, auditability, and self-healing, whereas kubectl apply is manual and error-prone.
+
+2️⃣0️⃣ Final summary question (MOST IMPORTANT)
+
+Interviewer: Can you summarize your project in one line?
+
+Answer (MEMORIZE THIS):
+
+I built a fully automated CI/CD and GitOps pipeline where Jenkins handles builds and image publishing, Argo CD manages deployment, and Kubernetes runs the application in a self-healing, declarative manner.
+
