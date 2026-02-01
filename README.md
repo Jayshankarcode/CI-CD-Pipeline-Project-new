@@ -400,6 +400,9 @@ We need to create a token in github.
 Now copy the token and paste in secret.
 <img width="1272" height="665" alt="image" src="https://github.com/user-attachments/assets/720c1d4f-0510-4d34-85c4-8a9bef900d31" />
 
+<img width="1231" height="422" alt="image" src="https://github.com/user-attachments/assets/f0025f41-a362-4afe-b7dc-2806f333b85a" />
+
+
 
 
 
