@@ -256,7 +256,64 @@ Once you are done with the above steps, it is better to restart Jenkins.
 http://<ec2-instance-public-ip>:8080/restart
 ```
 
+<img width="1352" height="118" alt="image" src="https://github.com/user-attachments/assets/aaabc0c3-e179-412d-bf8f-8fa067c70d40" />
+
+
 The docker agent configuration is now successful.
+
+Installation of miniKube: Minikube Installation (First Time – Docker Driver)
+
+✅ Prerequisites
+1️ OS
+•	Linux / macOS / Windows
+(You are on Windows + WSL / Git Bash, so this works)
+2️ Docker (Mandatory)
+Verify Docker is installed & running:
+docker version
+ Step 1: Install kubectl
+Linux / WSL
+curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+
+Verify:
+kubectl version --client
+________________________________________
+Windows (PowerShell – Admin)
+choco install kubernetes-cli -y
+Verify:
+kubectl version --client
+________________________________________
+🧩 Step 2: Install Minikube
+Linux / WSL
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+Verify:
+minikube version
+________________________________________
+Windows
+choco install minikube -y
+Verify:
+minikube version
+________________________________________
+ Step 3: Start Minikube (IMPORTANT)
+⭐ Use Docker driver (BEST for beginners)
+minikube start --driver=docker
+⏳ First time takes 2–5 minutes
+Expected output:
+Done! kubectl is now configured to use "minikube"
+________________________________________
+ Step 4: Verify Kubernetes Cluster
+kubectl get nodes
+Expected:
+minikube   Ready
+Check pods:
+kubectl get pods -A
+________________________________________
+🌐 Step 5: Access Kubernetes Dashboard (Optional)
+minikube dashboard
+Browser opens automatically.
+
 
 
 
