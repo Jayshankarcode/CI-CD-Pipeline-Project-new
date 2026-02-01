@@ -1,12 +1,12 @@
 pipeline {
   agent {
-    docker {
-      image 'abhishekf5/maven-abhishek-docker-agent:v1'
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-    }
+  docker {
+    image 'jayshankarkumar/maven-docker-agent:java17'
+    args '--user root -v /var/run/docker.sock:/var/run/docker.sock --pull=always'
   }
+}
 
-  stages {
+stages {
 
     stage('Checkout') {
       steps {
