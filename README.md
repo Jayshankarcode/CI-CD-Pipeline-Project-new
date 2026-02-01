@@ -387,6 +387,24 @@ kubectl get secret argocd-initial-admin-secret -n argocd \
 <img width="1326" height="570" alt="image" src="https://github.com/user-attachments/assets/f1ab162e-0b52-4dff-9d76-b10d9ae24f15" />
 
 
+Now we will create the docker crendiential in Jenkins.
+<img width="1247" height="667" alt="image" src="https://github.com/user-attachments/assets/1a1de1a5-f808-4a88-a302-b585a54a4092" />
+<img width="1329" height="518" alt="image" src="https://github.com/user-attachments/assets/a381a966-baab-4509-96bc-7281b4f67ec3" />
+
+Now we will create Github crediential in Jinkins.
+
+We need to create a token in github.
+
+<img width="1261" height="622" alt="image" src="https://github.com/user-attachments/assets/7bde748e-e2b6-43e7-a8e1-cd47d294df56" />
+<img width="1337" height="626" alt="image" src="https://github.com/user-attachments/assets/27f46d38-aaf4-4ece-83f5-afc7117001f0" />
+Now copy the token and paste in secret.
+<img width="1272" height="665" alt="image" src="https://github.com/user-attachments/assets/720c1d4f-0510-4d34-85c4-8a9bef900d31" />
+
+
+
+
+
+
 
 
 
