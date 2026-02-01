@@ -1,4 +1,4 @@
-pipeline {
+ppipeline {
   agent none
   stages {
     stage('Back-end') {
