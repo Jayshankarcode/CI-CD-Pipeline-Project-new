@@ -314,6 +314,81 @@ ________________________________________
 minikube dashboard
 Browser opens automatically.
 
+##Now we will install ArgoCD by using operator.
+Search: https://operatorhub.io/
+<img width="1252" height="348" alt="image" src="https://github.com/user-attachments/assets/27262d22-b60a-4718-9d04-afe93f02b955" />
+Search for ArgoCD.
+<img width="1285" height="682" alt="image" src="https://github.com/user-attachments/assets/933be9d8-821a-4ddf-b562-f09a4e1e06fd" />
+Now instal.
+<img width="1159" height="680" alt="image" src="https://github.com/user-attachments/assets/5d0251df-1f0d-44e3-8480-6f1ae72143f2" />
+
+<img width="1346" height="491" alt="image" src="https://github.com/user-attachments/assets/15ddfb51-d3c8-4737-be9f-67f0ad6a85f5" />
+
+<img width="1089" height="155" alt="image" src="https://github.com/user-attachments/assets/afd0a9b6-1923-409b-bf27-93300abe0d3a" />
+
+
+
+I was faing error so ✅ Install ArgoCD WITHOUT Operator (Industry Standard for Local)
+
+This is what 99% DevOps engineers do locally.
+
+🧩 Step 1: Clean up broken OLM (safe)
+kubectl delete namespace olm operators
+
+🧩 Step 2: Create ArgoCD namespace
+kubectl create namespace argocd
+
+🧩 Step 3: Install ArgoCD (official way)
+kubectl apply -n argocd \
+-f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+⏳ Wait 1–2 minutes
+
+<img width="679" height="687" alt="image" src="https://github.com/user-attachments/assets/c574995f-f57b-4394-badb-22aa6208f1d9" />
+
+
+🧩 Step 4: Verify pods
+kubectl get pods -n argocd
+
+<img width="639" height="159" alt="image" src="https://github.com/user-attachments/assets/444dd431-0c94-44d1-8949-dcf58503916e" />
+
+
+All should be Running
+
+🧩 Step 5: Expose ArgoCD UI (Minikube)
+kubectl patch svc argocd-server -n argocd \
+-p '{"spec": {"type": "NodePort"}}'
+
+<img width="352" height="65" alt="image" src="https://github.com/user-attachments/assets/23884257-caa4-4a95-b14a-5e6ce17badd6" />
+
+Then:
+
+minikube service argocd-server -n argocd
+
+<img width="816" height="263" alt="image" src="https://github.com/user-attachments/assets/4c62842f-150c-482c-89ac-ae9a495135dc" />
+
+Browser opens 🎉
+
+<img width="1315" height="615" alt="image" src="https://github.com/user-attachments/assets/00dfe736-ea3f-4697-b902-bffc4f6546f8" />
+
+
+🔐 Step 6: Login credentials
+
+Username
+
+admin
+
+
+Password
+
+kubectl get secret argocd-initial-admin-secret -n argocd \
+-o jsonpath="{.data.password}" | base64 --decode
+
+<img width="1326" height="570" alt="image" src="https://github.com/user-attachments/assets/f1ab162e-0b52-4dff-9d76-b10d9ae24f15" />
+
+
+
+
 
 
 
