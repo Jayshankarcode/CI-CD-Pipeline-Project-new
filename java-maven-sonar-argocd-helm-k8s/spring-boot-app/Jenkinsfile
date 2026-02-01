@@ -1,13 +1,9 @@
 pipeline {
-  agent {
-    docker {
-      image 'jayshankarkumar/maven-docker-agent:java17'
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock --pull=always'
-    }
-  }
+
+  agent none   // 👈 IMPORTANT: no global docker agent
 
   environment {
-    SONAR_URL = "http://34.227.65.30:9000"
+    SONAR_URL    = "http://34.227.65.30:9000"
     DOCKER_IMAGE = "jayshankarkumar/springboot-cicd:${BUILD_NUMBER}"
     GIT_REPO_NAME = "CI-CD-Pipeline-Project-new"
     GIT_USER_NAME = "Jayshankarcode"
@@ -16,6 +12,7 @@ pipeline {
   stages {
 
     stage('Checkout') {
+      agent any   // runs on Jenkins host
       steps {
         git branch: 'main',
             url: 'https://github.com/Jayshankarcode/CI-CD-Pipeline-Project-new.git'
@@ -23,6 +20,12 @@ pipeline {
     }
 
     stage('Build and Test') {
+      agent {
+        docker {
+          image 'jayshankarkumar/maven-docker-agent:java17'
+          args '--user root --pull=always'
+        }
+      }
       steps {
         dir('java-maven-sonar-argocd-helm-k8s/spring-boot-app') {
           sh 'mvn clean package'
@@ -31,6 +34,12 @@ pipeline {
     }
 
     stage('Static Code Analysis') {
+      agent {
+        docker {
+          image 'jayshankarkumar/maven-docker-agent:java17'
+          args '--user root --pull=always'
+        }
+      }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
           dir('java-maven-sonar-argocd-helm-k8s/spring-boot-app') {
@@ -45,17 +54,15 @@ pipeline {
     }
 
     stage('Build and Push Docker Image') {
+      agent any   // 👈 RUNS ON JENKINS HOST (FIXES docker not found)
       steps {
         withCredentials([usernamePassword(
           credentialsId: 'docker-cred',
           usernameVariable: 'DOCKER_USER',
           passwordVariable: 'DOCKER_PASS'
         )]) {
-          script {
-            dir('java-maven-sonar-argocd-helm-k8s/spring-boot-app') {
-              sh 'docker build -t ${DOCKER_IMAGE} .'
-            }
-
+          dir('java-maven-sonar-argocd-helm-k8s/spring-boot-app') {
+            sh 'docker build -t ${DOCKER_IMAGE} .'
             sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
             sh 'docker push ${DOCKER_IMAGE}'
           }
@@ -64,6 +71,7 @@ pipeline {
     }
 
     stage('Update Deployment File') {
+      agent any
       steps {
         withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
           sh """
