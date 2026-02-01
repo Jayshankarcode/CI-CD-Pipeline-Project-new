@@ -480,22 +480,43 @@ kubectl get svc
 You should see Spring Boot pods starting
 <img width="600" height="70" alt="image" src="https://github.com/user-attachments/assets/99249357-0230-46b5-a81d-df08b0ccc3c4" />
 
+<img width="940" height="94" alt="image" src="https://github.com/user-attachments/assets/c059454b-a9b4-47f5-852c-fc5c321a1204" />
+
+Finally Argo CD deployed automatically (GitOps proof)
+
+<img width="940" height="431" alt="image" src="https://github.com/user-attachments/assets/5c7eab8a-3ec5-4106-b696-a87e01f49a64" />
+<img width="1231" height="659" alt="image" src="https://github.com/user-attachments/assets/991d8818-9529-4dae-bb9f-0c8794f15cdb" />
+
+Now the ONLY remaining step: View the application
+
+Find the service name
+
+Run:
+
+kubectl get svc
 
 
+You should see something like:
+
+spring-boot-app   NodePort   ...
+<img width="664" height="75" alt="image" src="https://github.com/user-attachments/assets/12b027cc-bf6c-49db-805b-9f071732542e" />
 
 
+2️⃣ Open the app (Minikube way)
+
+Run:
+
+minikube service spring-boot-app
+
+<img width="940" height="211" alt="image" src="https://github.com/user-attachments/assets/1801b305-3610-4822-9a6f-0fc60e39d995" />
 
 
+This will:
+
+Open browser automatically
+OR
+
+Give you a URL → open it manually
 
 
-
-
-
-
-
-
-
-
-
-
-
+<img width="1249" height="643" alt="image" src="https://github.com/user-attachments/assets/019e64a7-28a0-45e3-9876-f97f151f7dd3" />
