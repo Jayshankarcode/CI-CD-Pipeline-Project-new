@@ -402,6 +402,11 @@ Now copy the token and paste in secret.
 
 <img width="1231" height="422" alt="image" src="https://github.com/user-attachments/assets/f0025f41-a362-4afe-b7dc-2806f333b85a" />
 
+Now we will build the pipeline from jenkins and will fix if any error.
+
+1. <img width="1351" height="470" alt="image" src="https://github.com/user-attachments/assets/95296db7-cadf-4f4d-9cbd-5ff08270f9c7" />
+
+
 
 
 
