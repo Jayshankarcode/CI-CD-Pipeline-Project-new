@@ -407,6 +407,8 @@ Now we will build the pipeline from jenkins and will fix if any error.
 
 <img width="1332" height="335" alt="image" src="https://github.com/user-attachments/assets/611056b5-9faf-441f-ae61-6773fc569974" />
 
+<img width="1335" height="376" alt="image" src="https://github.com/user-attachments/assets/a235055c-e483-4977-b6ea-e8c89fa91b92" />
+
 
 
 
