@@ -1,4 +1,108 @@
-CI-CD pipeline project
+End-to-End CI/CD & GitOps Pipeline using Jenkins, Docker, Kubernetes & Argo CD
+<img width="940" height="645" alt="image" src="https://github.com/user-attachments/assets/40592b1d-e2c6-4899-9976-fc281b2397f4" />
+
+🔹 Project Overview 
+I implemented an end-to-end CI/CD pipeline with GitOps principles for a Spring Boot application.
+The solution automates build, containerization, code quality checks, image publishing, and Kubernetes deployment using Jenkins and Argo CD.________________________________________
+🔹 Architecture & Tools Used
+🔧 Technology Stack
+Application: Spring Boot
+Build Tool: Maven
+CI Tool: Jenkins (Dockerized)
+Code Quality: SonarQube
+Containerization: Docker
+Container Registry: Docker Hub
+Orchestration: Kubernetes (Minikube)
+CD / GitOps: Argo CD
+Version Control: GitHub
+________________________________________
+High-Level Architecture Flow
+Developer → GitHub → Jenkins → Docker Hub → GitHub (manifests) → Argo CD → Kubernetes
+
+CI Pipeline (Jenkins) – VERY IMPORTANT SECTION
+🔹 What Jenkins does in this project
+Jenkins is responsible only for Continuous Integration, not deployment.
+🔹 Jenkins Pipeline Stages
+✅ Stage 1: Source Code Checkout
+Jenkins pulls application code from GitHub
+Ensures pipeline always runs on the latest commit
+✅ Stage 2: Build & Test
+Maven compiles the Spring Boot application
+Runs unit tests
+Generates JAR artifact
+✅ Stage 3: Static Code Analysis (SonarQube)
+Jenkins sends code to SonarQube
+Checks for:
+Bugs
+Code smells
+Security issues
+Fails the build if quality gate fails
+✅ Stage 4: Docker Image Build & Push
+Jenkins builds a Docker image using Java 17
+Image is tagged with Jenkins build number (example: springboot-cicd:13)
+Image is pushed to Docker Hub
+✅ Stage 5: Update Kubernetes Manifest in Git
+Jenkins updates only the image tag in deployment.yml
+Commits and pushes this change back to GitHub
+
+Why GitOps?
+Instead of Jenkins deploying to Kubernetes, I followed GitOps principles where Git is the single source of truth. Argo CD continuously monitors Git and reconciles the cluster state automatically.
+
+CD Pipeline (Argo CD) – CORE CONCEPT
+🔹 What Argo CD does
+Watches a specific folder in GitHub:
+spring-boot-app-manifests/
+Detects any change in Kubernetes YAML
+Automatically applies changes to Kubernetes
+🔹 Argo CD Application Configuration
+Repository: GitHub
+Branch: main
+Path: Kubernetes manifests
+Sync Policy:
+Automated
+Self-heal enabled
+Prune enabled
+📌 Key:
+Argo CD ensures the Kubernetes cluster always matches what is defined in Git.
+________________________________________
+7️.Kubernetes Deployment
+🔹 Kubernetes Objects Used
+Deployment
+Manages replicas
+Handles rolling updates
+Service (NodePort)
+Exposes application to external users
+🔹 Deployment Flow
+Argo CD applies manifests
+Kubernetes pulls Docker image
+Pods are created automatically
+Service exposes the application
+Proof of Automatic Deployment
+To verify automatic deployment, I changed only the image tag in Git. Argo CD detected the change, marked the app OutOfSync, then automatically synced it, restarted pods, and deployed the new version without any kubectl command.
+•  Argo CD UI shows Synced & Healthy
+•  Pod age changes after deployment
+Real Problems You Faced (VERY IMPORTANT)
+Interviewers LOVE this section.
+🔴 Problem 1: ImagePullBackOff
+Cause: Image tag updated in manifest but image not built
+Fix: Ensured Jenkins builds & pushes image before updating manifest
+🔴 Problem 2: Jenkins executor blocked
+Cause: Low disk space on Jenkins node
+Fix: Cleaned Docker images and workspaces
+🔴 Problem 3: Workspace permission issue
+Cause: Docker ran as root, Jenkins couldn’t delete files
+Fix: Corrected ownership and standardized user execution
+These issues helped me understand real production-level CI/CD challenges.
+________________________________________
+🔟 Why This Project Is Production-Ready
+CI and CD are fully separated
+No manual deployments
+Git is the single source of truth
+Self-healing enabled
+Easy rollback via Git
+Jenkins is disposable
+
+
 
 ## Installation on EC2 Instance
 
