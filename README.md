@@ -459,6 +459,28 @@ java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests
 •	Namespace: default
 Click Create → Sync.
 
+<img width="575" height="40" alt="image" src="https://github.com/user-attachments/assets/59d28174-6f82-4172-996b-12f83456edc6" />
+
+Check Argo CD UI
+
+Open Argo CD UI → you should see:
+
+springboot-app
+
+Status: Synced
+
+Health: Healthy (or progressing → healthy)
+
+<img width="1237" height="663" alt="image" src="https://github.com/user-attachments/assets/7a51174e-cae6-4733-9d03-51f8b8061980" />
+
+2.check Kubernetes resources
+kubectl get pods
+kubectl get deploy
+kubectl get svc
+You should see Spring Boot pods starting
+<img width="600" height="70" alt="image" src="https://github.com/user-attachments/assets/99249357-0230-46b5-a81d-df08b0ccc3c4" />
+
+
 
 
 
