@@ -408,6 +408,60 @@ Now we will build the pipeline from jenkins and will fix if any error.
 <img width="1332" height="335" alt="image" src="https://github.com/user-attachments/assets/611056b5-9faf-441f-ae61-6773fc569974" />
 
 <img width="1335" height="376" alt="image" src="https://github.com/user-attachments/assets/a235055c-e483-4977-b6ea-e8c89fa91b92" />
+<img width="1292" height="616" alt="image" src="https://github.com/user-attachments/assets/f9734692-e0a6-4d39-8b48-b6f906b13057" />
+
+So we have completed the CI part.
+--------------------------------------------------------------------------
+
+Now we will see the CD part where Argocd will take care of deployment.
+We will check the kubernetes cluster status.
+Minikube status.
+
+<img width="737" height="165" alt="image" src="https://github.com/user-attachments/assets/d42f5f87-3aae-4426-9a60-4545b96b70f4" />
+create ONE Argo CD Application that points to the repo
+Create Argo CD Application YAML (GitOps way)
+
+Create a file springboot-argocd-app.yml (name can be anything):
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: springboot-app
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/Jayshankarcode/CI-CD-Pipeline-Project-new.git
+    targetRevision: main
+    path: java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+Apply it:
+kubectl apply -f springboot-argocd-app.yml
+
+OPTION 2: Create Application via Argo CD UI (simpler)
+This is also 100% valid (many teams do this).
+Fill like this:
+•	Application name: springboot-app
+•	Repo URL:
+https://github.com/Jayshankarcode/CI-CD-Pipeline-Project-new.git
+•	Path:
+java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests
+•	Revision: main
+•	Cluster: https://kubernetes.default.svc
+•	Namespace: default
+Click Create → Sync.
+
+
+
+
 
 
 
