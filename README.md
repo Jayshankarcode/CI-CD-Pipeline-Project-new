@@ -3,7 +3,9 @@ End-to-End CI/CD & GitOps Pipeline using Jenkins, Docker, Kubernetes & Argo CD
 
 🔹 Project Overview 
 I implemented an end-to-end CI/CD pipeline with GitOps principles for a Spring Boot application.
-The solution automates build, containerization, code quality checks, image publishing, and Kubernetes deployment using Jenkins and Argo CD.________________________________________
+The solution automates build, containerization, code quality checks, image publishing, and Kubernetes deployment using Jenkins and Argo CD.
+
+________________________________________
 🔹 Architecture & Tools Used
 🔧 Technology Stack
 Application: Spring Boot
@@ -15,9 +17,12 @@ Container Registry: Docker Hub
 Orchestration: Kubernetes (Minikube)
 CD / GitOps: Argo CD
 Version Control: GitHub
+
 ________________________________________
 High-Level Architecture Flow
 Developer → GitHub → Jenkins → Docker Hub → GitHub (manifests) → Argo CD → Kubernetes
+
+
 
 CI Pipeline (Jenkins) – VERY IMPORTANT SECTION
 🔹 What Jenkins does in this project
@@ -45,8 +50,12 @@ Image is pushed to Docker Hub
 Jenkins updates only the image tag in deployment.yml
 Commits and pushes this change back to GitHub
 
+
+
 Why GitOps?
 Instead of Jenkins deploying to Kubernetes, I followed GitOps principles where Git is the single source of truth. Argo CD continuously monitors Git and reconciles the cluster state automatically.
+
+
 
 CD Pipeline (Argo CD) – CORE CONCEPT
 🔹 What Argo CD does
@@ -64,6 +73,8 @@ Self-heal enabled
 Prune enabled
 📌 Key:
 Argo CD ensures the Kubernetes cluster always matches what is defined in Git.
+
+
 ________________________________________
 7️.Kubernetes Deployment
 🔹 Kubernetes Objects Used
@@ -72,15 +83,21 @@ Manages replicas
 Handles rolling updates
 Service (NodePort)
 Exposes application to external users
+
+
 🔹 Deployment Flow
 Argo CD applies manifests
 Kubernetes pulls Docker image
 Pods are created automatically
 Service exposes the application
+
+
 Proof of Automatic Deployment
 To verify automatic deployment, I changed only the image tag in Git. Argo CD detected the change, marked the app OutOfSync, then automatically synced it, restarted pods, and deployed the new version without any kubectl command.
 •  Argo CD UI shows Synced & Healthy
 •  Pod age changes after deployment
+
+
 Real Problems You Faced (VERY IMPORTANT)
 Interviewers LOVE this section.
 🔴 Problem 1: ImagePullBackOff
@@ -93,6 +110,8 @@ Fix: Cleaned Docker images and workspaces
 Cause: Docker ran as root, Jenkins couldn’t delete files
 Fix: Corrected ownership and standardized user execution
 These issues helped me understand real production-level CI/CD challenges.
+
+
 ________________________________________
 🔟 Why This Project Is Production-Ready
 CI and CD are fully separated
@@ -101,7 +120,6 @@ Git is the single source of truth
 Self-healing enabled
 Easy rollback via Git
 Jenkins is disposable
-
 
 
 ## Installation on EC2 Instance
